@@ -144,7 +144,6 @@
             android:layout_gravity="center"
             android:orientation="vertical"
             >
-
             <TextView
                 android:id="@+id/pesito"
                 android:layout_width="match_parent"
@@ -188,7 +187,6 @@
                     android:src="@drawable/add"
                     app:backgroundTint="@color/bg_fab"
                     app:tint="@color/white"/>
-
             </LinearLayout>
 
         </LinearLayout>

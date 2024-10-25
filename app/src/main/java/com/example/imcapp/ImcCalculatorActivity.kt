@@ -1,15 +1,13 @@
 package com.example.imcapp
 
-import android.annotation.SuppressLint
-import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.slider.Slider
 
 class ImcCalculatorActivity : AppCompatActivity() {
@@ -22,7 +20,14 @@ class ImcCalculatorActivity : AppCompatActivity() {
     private lateinit var nEdad:TextView
     private lateinit var pesito:TextView
     private lateinit var nPesito:TextView
+    private lateinit var btnAddWeight:FloatingActionButton
+    private lateinit var btnSubtractWeight:FloatingActionButton
+    private lateinit var btnAddAge:FloatingActionButton
+    private lateinit var btnSubtractAge:FloatingActionButton
 
+
+    private var weight:Int = 0
+    private var age:Int = 0
 
     private fun initComponents(){
         viewMale = findViewById(R.id.viewMale)
@@ -33,6 +38,11 @@ class ImcCalculatorActivity : AppCompatActivity() {
         nEdad = findViewById(R.id.nEdad)
         pesito = findViewById(R.id.pesito)
         nPesito = findViewById(R.id.nPesito)
+        btnAddWeight = findViewById(R.id.btnAddWeight)
+        btnSubtractWeight = findViewById(R.id.btnSubtractWeight)
+        btnAddAge = findViewById(R.id.btnAddAge)
+        btnSubtractAge = findViewById(R.id.btnSubtractAge)
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,15 +57,48 @@ class ImcCalculatorActivity : AppCompatActivity() {
 
     private fun initUI() {
         setGenderColor(false)
+        setAge(age)
+        setWeight(weight)
     }
 
     private fun initListeners() {
         viewMale.setOnClickListener() {setGenderColor(true)}
         viewFemale.setOnClickListener() {setGenderColor(false)}
         rsHeight.addOnChangeListener { _, value, _ ->
-        tvHeight.text = "%.0f".format(value)
-}
-        
+        tvHeight.text = "%.0f".format(value) + "cm"}
+        btnAddAge.setOnClickListener() {
+            age++
+            setAge(age)
+        }
+        btnAddWeight.setOnClickListener() {
+            weight++
+            setWeight(weight)
+        }
+
+        btnAddWeight.setOnClickListener() {
+            if (weight > 0 && weight < 500)  weight++ // Asegúrate de que no baje de 0
+            nPesito.text = weight.toString()
+        }
+
+        btnSubtractWeight.setOnClickListener() {
+            if (weight > 0) weight-- // Asegúrate de que no baje de 0
+            nPesito.text = weight.toString()
+        }
+
+        btnSubtractAge.setOnClickListener() {
+            if (age > 0) age-- // Asegúrate de que no baje de 0
+            setAge(age)
+        }
+
+    }
+
+    private fun setWeight(weight: Int) {
+        nPesito.text = weight.toString()
+    }
+
+
+    private fun setAge(age: Int) {
+        nEdad.text = age.toString()
     }
 
     private fun setGenderColor(isMaleSelected:Boolean){
