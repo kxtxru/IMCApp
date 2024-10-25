@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">IMCApp</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="nAltura">120 cm</string>
+    <string name="altura">Altura</string>
+    <string name="peso">Peso</string>
+    <string name="edad">Edad</string>
+    <string name="nEdad">12</string>
+    <string name="nPeso">21</string>
+
+</resources>
